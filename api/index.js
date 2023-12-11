@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
 require('dotenv').config();
 
 const productRouter = require('../routes/productRoute');
@@ -36,31 +38,9 @@ app.get('/users', (req, res) => {
     });
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/products', productRouter);
 
 module.exports = app;
-
-
-
-/*let products = [
-    { id: 1, title: "apple1", price: 320 },
-    { id: 2, title: "apple2", price: 420 },
-    { id: 3, title: "apple3", price: 520 },
-];*/
-
-/*app.get('/products', (req, res) => {
-    res.send({
-        products: products,
-    });
-});
-
-app.get('/products/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const product = products.find((product) => product.id === id);
-    res.send({
-        product: product,
-    });
-});*/
-
